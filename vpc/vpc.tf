@@ -1,5 +1,6 @@
 module "vpc" {
   source = "../../terraform-aws-vpc"
+  vpc_cidr = var.vpc_cidr
   project_name = var.project
   environment = var.envi
   common_tags = var.common_tags
@@ -18,3 +19,4 @@ module "vpc" {
   is_peering_required = var.is_peering_required
   peering_tags = var.peering_tags
 }
+

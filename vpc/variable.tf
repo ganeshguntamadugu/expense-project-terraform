@@ -1,3 +1,7 @@
+variable "vpc_cidr" {
+    default = "10.0.0.0/16"
+}
+
 variable "project" {
     default = "expense"
 }
@@ -84,6 +88,7 @@ variable "database_route_table_tags" {
     }
 }
 
+#Peering
 variable "is_peering_required" {
     default = true
 }
