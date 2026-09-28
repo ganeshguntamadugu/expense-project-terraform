@@ -98,3 +98,14 @@ variable "peering_tags" {
         Resource = "Peering-connections"
     }
 }
+
+variable "parameter_store_required" {
+    default = true
+  
+}
+
+variable "parameter_tags" {
+    default = {
+        Resource = "SSM-Parameter-Store"
+    }
+}

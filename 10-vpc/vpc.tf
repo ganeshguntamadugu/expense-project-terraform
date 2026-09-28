@@ -1,5 +1,6 @@
 module "vpc" {
-  source = "../../terraform-aws-vpc"
+  #source = "../../terraform-aws-vpc"
+  source = "git::https://github.com/ganeshguntamadugu/terraform-aws-vpc.git"
   vpc_cidr = var.vpc_cidr
   project_name = var.project
   environment = var.envi
@@ -18,5 +19,7 @@ module "vpc" {
   database_route_table_tags = var.database_route_table_tags
   is_peering_required = var.is_peering_required
   vpc_peering_tags = var.peering_tags
+  parameter_tags = var.parameter_tags
+  parameter_store_required = var.parameter_store_required
 }
 
