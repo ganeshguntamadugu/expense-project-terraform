@@ -1,4 +1,5 @@
 module "sg" {
+    # source = "../../terraform-aws-sg"
     source = "git::https://github.com/ganeshguntamadugu/terraform-aws-sg.git?ref=main"
     project_name = var.project_name
     environment = var.environment
