@@ -2,11 +2,11 @@ variable "vpc_cidr" {
     default = "10.0.0.0/16"
 }
 
-variable "project" {
+variable "project_name" {
     default = "expense"
 }
 
-variable "envi" {
+variable "environment" {
     default = "dev"
 }
 
@@ -97,11 +97,6 @@ variable "peering_tags" {
     default = {
         Resource = "Peering-connections"
     }
-}
-
-variable "parameter_store_required" {
-    default = true
-  
 }
 
 variable "parameter_tags" {
