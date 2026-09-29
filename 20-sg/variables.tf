@@ -36,7 +36,12 @@ variable "frontend_sg_tags" {
     }
 }
 
-
+variable "bastion_sg_tags" {
+    default = {
+        Resource = "Security Group"
+        Component = "Bastion"
+    }
+}
 
 
 

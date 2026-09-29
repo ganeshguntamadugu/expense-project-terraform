@@ -13,12 +13,12 @@ module "vpc" {
   public_subnet_cidrs = var.public_subnet_cidrs
   private_subnet_cidrs = var.private_subnet_cidrs
   database_subnet_cidrs = var.database_subnet_cidrs
+  db_subnet_group_tags = var.db_subnet_group_tags
   nat_gateway_tags = var.nat_gateway_tags
   public_route_table_tags = var.public_route_table_tags
   private_route_table_tags = var.private_route_table_tags
   database_route_table_tags = var.database_route_table_tags
   is_peering_required = var.is_peering_required
   vpc_peering_tags = var.peering_tags
-  parameter_tags = var.parameter_tags
 }
 

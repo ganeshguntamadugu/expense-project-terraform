@@ -63,6 +63,12 @@ variable "database_subnet_tags" {
    }
 }
 
+variable "db_subnet_group_tags" {
+    default = {
+        Resource = "Database Subnet Group"
+    }
+}
+
 variable "nat_gateway_tags" {
     default = {
         Resource = "Nat Gateway"
