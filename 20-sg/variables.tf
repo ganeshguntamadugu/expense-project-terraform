@@ -43,6 +43,19 @@ variable "bastion_sg_tags" {
     }
 }
 
+variable "ansible_sg_tags" {
+    default = {
+        Resource = "Security Group"
+        Component = "Ansible"
+    }
+}
+
+variable "parameter_tags" {
+    default = {
+        Resource = "SSM-Parameter-Store"
+    }
+}
+
 
 
 

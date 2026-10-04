@@ -42,6 +42,17 @@ module "bastion_sg" {
     sg_tags = var.bastion_sg_tags
 }
 
+module "ansible_sg" {
+    source = "../../terraform-aws-sg"
+    # source = "git::https://github.com/ganeshguntamadugu/terraform-aws-sg.git?ref=main"
+    project_name = var.project_name
+    environment = var.environment
+    sg_name = "ansible"
+    vpc_id = data.aws_ssm_parameter.vpc_id.value
+    common_tags = var.common_tags
+    sg_tags = var.ansible_sg_tags
+}
+
 #Mysql allowing connections to 3306 from the instance attached to Backend
 resource "aws_security_group_rule" "mysql_backend" {
   type              = "ingress"
@@ -102,5 +113,52 @@ resource "aws_security_group_rule" "frontend_bastion" {
   security_group_id = module.frontend_sg.sg_id
 }
 
+#Bastion allowing connections to 22 for Public
+resource "aws_security_group_rule" "bastion_public" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = module.bastion_sg.sg_id
+}
 
+#MySQL allowing Ansible to connect through SSH protocol
+resource "aws_security_group_rule" "mysql_ansible" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.ansible_sg.sg_id
+  security_group_id = module.mysql_sg.sg_id
+}
 
+#Backendend allowing Ansible to connect through SSH protocol
+resource "aws_security_group_rule" "backend_ansible" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.ansible_sg.sg_id
+  security_group_id = module.backend_sg.sg_id
+}
+
+#Frontend allowing Ansible to connect through SSH protocol
+resource "aws_security_group_rule" "frontend_ansible" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  source_security_group_id = module.ansible_sg.sg_id
+  security_group_id = module.frontend_sg.sg_id
+}
+
+#Ansible allowing connections to 22 for Public
+resource "aws_security_group_rule" "ansible_public" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = module.ansible_sg.sg_id
+}
